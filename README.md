@@ -2,13 +2,16 @@
 
 This project builds, trains, and deploys a sentiment analysis model on the IMDb dataset using FastAPI and Docker. It exposes a REST API for making predictions and is ready for integration into CI/CD workflows and cloud deployments.
 
-## Features 
-- Uses IMDb movie review dataset
-- Preprocessing with NLTK and scikit-learn
-- Logistic Regression + TfidfVectorizer
-- Exposed via a FastAPI REST API
-- Containerized using Docker
-- Production-ready structure for MLOps
+## Components Overview
+
+| Component        |  Purpose                                                             |
+|------------------|----------------------------------------------------------------------|
+| Dataset	         |  IMDb movie reviews (binary sentiment classification)                | 
+| ML Pipeline	     |  Data preprocessing + Logistic Regression using scikit-learn         |       
+| REST API	       |  FastAPI to serve the model and accept POST requests                 |
+| Containerization |  Docker to encapsulate dependencies and deployment                   |         
+| Model Versioning |  MLflow to log models, parameters, and metrics per run               | 
+| CI/CD	           |  GitHub Actions to automate training, testing, and deployment steps  |               
 
 ## Project Structure 
 ```
@@ -54,6 +57,22 @@ This will:
 - Train the model
 - Save the model to app/sentiment_model.joblib
 
+## View Training Runs in MLflow UI
+MLflow tracks all model training runs and logs them under the `mlruns/` directory.
+
+To visualize training results: `mlflow ui`
+
+Then open your browser and go to: http://127.0.0.1:5000
+
+From the MLflow dashboard, you can:
+- Browse all experiment runs
+- Compare accuracy metrics
+- Inspect hyperparameters
+- Download trained models
+- View logged artifacts
+
+This is useful for model versioning and comparison in an MLOps workflow.
+
 ## Running the API Locally
 
 ### Start with Uvicorn (Dev Mode)
@@ -80,15 +99,12 @@ curl -X POST http://127.0.0.1:8000/predict \
 ```
 ## Build the image
 docker build -t sentiment-service . 
-
 ## Run the container
 docker run -p 8000:8000 sentiment-service
-
 ## Access the API 
 curl -X POST http://localhost:8000/predict \
      -H "Content-Type: application/json" \
      -d '{"text": "This was a terrible experience"}'
-
 ```
 
 ## API Reference

@@ -1,18 +1,22 @@
-from datasets import load_dataset
-
+import os
+import string
+import joblib
+import mlflow
+import mlflow.sklearn
+import nltk
 from sklearn.model_selection import train_test_split
 from sklearn.pipeline import Pipeline
 from sklearn.linear_model import LogisticRegression
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics import classification_report
+from sklearn.metrics import accuracy_score
 
-import joblib
-
-import os
 import re
-import string
-import nltk
+from datasets import load_dataset
 from nltk.corpus import stopwords
+
+import uuid
+model_name = f"sentiment_model_{uuid.uuid4().hex[:8]}"
 
 nltk.download("stopwords")
 stop_words = set(stopwords.words("english"))
@@ -56,11 +60,27 @@ def main():
 
     print("Evaluating...")
     y_pred = model.predict(X_test)
+    accuracy = accuracy_score(y_test, y_pred)
     print(classification_report(y_test, y_pred))
 
     print("Saving model...")
     os.makedirs("app", exist_ok=True)
     joblib.dump(model, "app/sentiment_model.joblib")
+
+    # Log to MLflow
+    mlflow.set_experiment("SentimentAnalysis")
+    with mlflow.start_run():
+        mlflow.log_params({
+            "model": "LogisticRegression",
+            "vectorizer": "TfidfVectorizer",
+            "stop_words": True,
+            "max_features": 10000
+        })
+        mlflow.log_metric("accuracy", accuracy)
+        mlflow.sklearn.log_model(model, model_name)
+        mlflow.log_artifact("train/train_model.py")
+
+        print("Training complete. Model logged to MLflow.")
 
 if __name__ == "__main__":
     main()
