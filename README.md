@@ -16,15 +16,19 @@ This project builds, trains, and deploys a sentiment analysis model on the IMDb 
 ## Project Structure 
 ```
 Sentiment-Analysis-Web-Service/
+├── .github/workflows/
+│   └── ci-cd.yml                 # GitHub Actions pipeline
 ├── app/
-│   ├── main.py                # FastAPI app
-│   ├── model.py               # Model loader
-│   └── sentiment_model.joblib # Serialized model (created after training)
+│   ├── main.py                   # FastAPI app
+│   ├── model.py                  # Model loader
 ├── train/
-│   └── train_model.py         # Training and preprocessing script
-├── requirements.txt           # Python dependencies
-├── Dockerfile                 # Docker image definition
-└── README.md                  # Project documentation
+│   └── train_model.py            # Training + MLflow logging
+├── tests/
+│   └── test_api.py               # Simple unit test
+├── Dockerfile
+├── requirements.txt
+├── mlruns/                       # MLflow artifacts (auto-generated)
+├── README.md
 ```
 
 ## Dataset
