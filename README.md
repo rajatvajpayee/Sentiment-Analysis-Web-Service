@@ -45,7 +45,7 @@ cd Sentiment-Analysis-Web-Service
 
 #### Install Python Dependencies 
 ```
-pip install -r requirements.txt
+[Sentiment-Analysis-Web-Service] $ pip install -r requirements.txt
 ```
 
 ## Train the Model 
@@ -81,7 +81,7 @@ This is useful for model versioning and comparison in an MLOps workflow.
 
 ### Start with Uvicorn (Dev Mode)
 ```
-uvicorn app.main:app --reload
+[Sentiment-Analysis-Web-Service] $ uvicorn app.main:app --reload
 ```
 
 ### Test the Endpoint
@@ -89,9 +89,9 @@ uvicorn app.main:app --reload
 
 **Sample Request** :  
 ```
-curl -X POST http://127.0.0.1:8000/predict \
-     -H "Content-Type: application/json" \
-     -d '{"text": "The movie was excellent!"}'
+[Sentiment-Analysis-Web-Service] $ curl -X POST http://127.0.0.1:8000/predict \
+                                            -H "Content-Type: application/json" \
+                                            -d '{"text": "The movie was excellent!"}'
 ```
 
 **Response** : 
@@ -103,7 +103,7 @@ This project includes a test suite located in the `tests/` directory. These test
 
 ###  To run the tests:
 ```
-[ads] $ pytest
+[Sentiment-Analysis-Web-Service] $ pytest
 
 ============================= test session starts =============================
 collected 1 item
@@ -118,13 +118,15 @@ Make sure the model is already trained (app/sentiment_model.joblib exists), or r
 ## Docker Deployment
 ```
 ## Build the image
-docker build -t sentiment-service . 
+[Sentiment-Analysis-Web-Service] $ docker build -t sentiment-service . 
+
 ## Run the container
-docker run -p 8000:8000 sentiment-service
+[Sentiment-Analysis-Web-Service] $ docker run -p 8000:8000 sentiment-service
+
 ## Access the API 
-curl -X POST http://localhost:8000/predict \
-     -H "Content-Type: application/json" \
-     -d '{"text": "This was a terrible experience"}'
+[Sentiment-Analysis-Web-Service] $  curl -X POST http://localhost:8000/predict \
+                                          -H "Content-Type: application/json" \
+                                          -d '{"text": "This was a terrible experience"}'
 ```
 
 ## API Reference
@@ -148,7 +150,7 @@ curl -X POST http://localhost:8000/predict \
 - fastapi, scikit-learn, joblib, nltk, datasets, uvicorn
 
 ```
-pip install -r requirements.txt
+[Sentiment-Analysis-Web-Service] $ pip install -r requirements.txt
 ```
 
 ## Future Improvements 
