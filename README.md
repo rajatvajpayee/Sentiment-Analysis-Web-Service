@@ -98,6 +98,22 @@ curl -X POST http://127.0.0.1:8000/predict \
 ```
 {"prediction": "positive"}
 ```
+##  Run Unit Tests with Pytest
+This project includes a test suite located in the `tests/` directory. These tests ensure that the REST API is working as expected and returns valid sentiment predictions.
+
+###  To run the tests:
+```
+[ads] $ pytest
+
+============================= test session starts =============================
+collected 1 item
+
+tests/test_api.py .                                                   [100%]
+
+============================== 1 passed in 0.45s =============================
+```
+
+Make sure the model is already trained (app/sentiment_model.joblib exists), or run: `python train/train_model.py`
 
 ## Docker Deployment
 ```
