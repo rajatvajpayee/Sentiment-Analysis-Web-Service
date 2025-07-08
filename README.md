@@ -15,7 +15,7 @@ This project builds, trains, and deploys a sentiment analysis model on the IMDb 
 
 ## Project Structure 
 ```
-sentiment-service/
+Sentiment-Analysis-Web-Service/
 ├── app/
 │   ├── main.py                # FastAPI server with /predict endpoint
 │   ├── model.py               # Load serialized model

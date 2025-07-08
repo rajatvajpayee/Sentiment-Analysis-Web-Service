@@ -4,3 +4,6 @@ scikit-learn
 joblib
 nltk
 datasets
+mlflow
+pytest
+httpx
