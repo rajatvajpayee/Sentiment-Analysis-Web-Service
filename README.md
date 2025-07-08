@@ -52,7 +52,7 @@ cd Sentiment-Analysis-Web-Service
 The model is trained using a Logistic Regression classifier on TF-IDF features. Preprocessing includes token cleaning, punctuation removal, and stop word filtering.
 To train - 
 ```
-python train/train_model.py
+[Sentiment-Analysis-Web-Service] $ python train/train_model.py
 ```
 
 This will:
